@@ -28,6 +28,6 @@ sal=cof[0]*4+cof[1]*2+cof[2]*3+inter
 
 # Step 4=========================
 df["predicted_salary"]=model1.predict(X)
-p=model1.predict([[4,2,3]])
+p=model1.predict([[5,2,3]])
 print(p[0])
 print(df.head())
