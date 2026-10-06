@@ -1,33 +1,43 @@
+# from sklearn.datasets import load_breast_cancer
+# from sklearn.linear_model import LogisticRegression
+# from sklearn.model_selection import train_test_split
+# from sklearn.metrics import accuracy_score
+# # Load the dataset directly as features (X) and target (y)
+# X, y = load_breast_cancer(return_X_y=True)
+
+# # Split into training and testing sets
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# # print(X_train)
+# # Train a basic linear regression model
+# model = LogisticRegression(max_iter=1000)
+# model.fit(X_train, y_train)
+# prediction=model.predict(X_test)
+# # print("Model Coefficients:", model.coef_)
+# accuracy=accuracy_score(y_test,prediction)
+# print(accuracy)  
+
+
+
+
+
+
+
+
+
+
 
 import pandas as pd
-from matplotlib import pyplot as plt
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-df=pd.read_csv("E:\Online Courses\Programs\ML & DL\Machine Learning\student_exam_performance_cleaned.csv")
+from sklearn.model_selection import train_test_split
 
-df['time_management_score']=df["time_management_score"].fillna(df['time_management_score'].mean())
-df['study_hours_per_day']=df["study_hours_per_day"].fillna(df['study_hours_per_day'].mean())
-df['sleep_hours']=df["sleep_hours"].fillna(df['sleep_hours'].mean())
-df['exam_anxiety_level']=df["exam_anxiety_level"].fillna(df['exam_anxiety_level'].mean())
-df['exam_score']=df["exam_score"].fillna(df['exam_score'].mean())
+df=pd.read_csv("E:\Online Courses\Programs\ML & DL\Machine Learning\SalaryGender.csv")
+X=[[ 'Gender', 'Age', 'PhD']]
+y=['Salary']
+print(df.head())
 
-features=df[['time_management_score','study_hours_per_day','sleep_hours','exam_anxiety_level']]
-target=df['exam_score']
-
-# plt.scatter(df['study_hours_per_day'],df['exam_score'])
-# plt.xlabel("Study Hours Per Day")
-# plt.ylabel("Exam Score")
-# plt.title("Study Hours Per Day vs Exam Score")
-# plt.show()
-
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
-
-model = LinearRegression()
-model.fit(X_train, y_train)
-# print(model.coef_)
-# print(model.intercept_)
-df["predicted_exam_score"]=model.predict(features)
-# print(df[["exam_score","predicted_exam_score"]])
-
-accuracy = model.score(X_test, y_test)
-print("Model Accuracy:", accuracy   *100, "%")
+X_train,y_train,X_test,y_test=train_test_split(X,y,random_state=42,test_size=0.2)
+model=LinearRegression()
+model.fit(X_train,y_train)
+predict=model.predict(X_test)
+accuracy=model.score(y_test,predict)
+print(accuracy)
